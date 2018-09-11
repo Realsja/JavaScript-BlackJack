@@ -5,19 +5,29 @@
         <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
-        <div class="center">
-            <h1 class="gamename">JavaScript BlackJack</h1>
+        <div class="table">
+            <h1 class="gamename">X:\Users\player\retro_black_jack.js></h1>
+            <p>JavaScript-BlackJack</p>
 
-            <button class="button btn1" id="new-btn">New Game</button>
-            <button class="button btn2" id="hit-btn">Hit</button>
-            <button class="button btn3" id="stay-btn">Stay</button>
-            
-            <p id="output">output</p>
+            <p>____________________________________________________</p>
+            /<button onclick="newGame()" class="button btn1" id="new-btn">New Game</button>
+            /<button onclick="hitMe()" class="button btn2" id="hit-btn">Hit</button>
+            /<button onclick="stay()" class="button btn3" id="stay-btn">Stay</button>/
+            <p>____________________________________________________</p>
 
-            <div id="players" class="players">
+            <p id="player">[player] =></p>
+
+            <div id="playerui" >  
             </div>
 
-            <script src ="BlackJack.js"></script>
+            <p id="dealer"><= [dealer]</p>
+
+            <div id="dealerui">
+            </div>
+
+            <p id="res"></p>
+
         </div>
+        <script src ="BlackJack.js"></script>
     </body>
 </html>

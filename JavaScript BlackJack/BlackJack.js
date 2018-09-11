@@ -4,7 +4,11 @@ let dealerhand = [];
 let player = {score: 0, Hand: playerhand, acebool: false}; //acebool determines if player or dealer has ace. if they have over 21, ace converts to the value of 1
 let dealer = {score: 0, Hand: dealerhand, acebool: false};
 
-let suits = ['Clubs', 'Spades', 'Hearts', 'Diamonds'];
+let playerui = document.getElementById("playerui");
+let dealerui = document.getElementById("dealerui");
+let res = document.getElementById("res");
+
+let suits = ['♣', '♠', '♥', '♦'];
 let values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
 let deck = new Array();
 
@@ -52,6 +56,7 @@ function dealCards() { //deals 2 cards to both player and dealer
             dealer.acebool = true;
         }
     }
+    getuiCard();
     isOver();
 }
 
@@ -61,34 +66,35 @@ function hitMe() {
     playerhand[ph] = card;
     player.score += card.Cardval;
     ph += 1; //ups value for next empty slot in the array
+    getuiCard();
     isOver();
 }
 
 function isOver() { 
     if (player.score == 21) { 
         console.log("You've got 21, You Win!")
+        res.innerHTML = "You've got 21, You Win!";
     }
-
     if (player.score > 21) { //check over 21
         if (player.acebool == true) {
             player.score -= 10;
-            console.log("Hand over 21, Ace is now equal to 1");
+            res.innerHTML = "Ace converted into 1";
         }
         else {
-            console.log("You've busted. Game over.")
+            res.innerHTML = "You've busted. Game over.";
         }
     }
-
     if (dealer.score == 21) {
-        console.log("Dealer has 21, you've lost");
+        res.innerHTML= "Dealer has 21, you've lost";
     }
 
     if (dealer.score > 21) { //check over 21
         if (dealer.acebool == true) {
             dealer.score -= 10;
+            "Dealer's ace converted into 1";
         }
         else {
-            console.log("Dealer has busted, You Win!");
+            res.innerHTML = "Dealer has busted, You Win!";
         }
     }
 
@@ -101,28 +107,30 @@ function stay() {
         dealerhand[dh] = card;
         dealer.score += card.Cardval;
         dh += 1;
+        getuiCard();
         isOver();
     }
 }
 
+function getuiCard() {
+    playerui.innerHTML = "";
+    dealerui.innerHTML = "";
+    for (var x = 0; x < playerhand.length; x++) {
+        let pui = playerhand[x].Value + playerhand[x].Suit;
+        playerui.innerHTML += "<div>" + pui + "</div>";
+    }
+    for (var i = 0; i < dealerhand.length; i++) {
+        let dui = dealerhand[i].Value + dealerhand[i].Suit;
+        dealerui.innerHTML += "<div>" + dui + "</div>";
+    }
+}
+
+function newGame() {
+    location.reload();
+}
 
 generateDeck();
 shuffle();
 dealCards();
-console.log("Your hand ", player.Hand);
-console.log(player.score);
-
-console.log("Dealer's hand ", dealer.Hand);
-console.log(dealer.score);
-
-hitMe();
-
-/*let d21 = dealerhand.length;
-        for (var x = 0; x <= d21; x++) {
-            if (dealerhand[x].Cardval == 11) {
-                dealer.score -= 10;
-                console.log('dealerboi');
-            }
-        }*/
 
 
